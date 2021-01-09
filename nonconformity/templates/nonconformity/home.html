@@ -1,0 +1,12 @@
+{% if nonconformity_list %}
+    <ul>
+        {% for nonconformity in nonconformity_list %}
+            <li><a href="{% url 'nonconformity:detail' nonconformity.id %}">
+                {{ nonconformity.description }}
+            </a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No nonconformity are available.</p>
+{% endif %}
+

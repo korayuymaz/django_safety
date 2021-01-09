@@ -1,9 +1,16 @@
 from django.db import models
 
+from datetime import datetime
+
+from django.urls import reverse
+
 
 class Employee(models.Model):
     name = models.CharField(max_length=200)
     age = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 
 class Nonconformity(models.Model):
@@ -19,8 +26,8 @@ class Nonconformity(models.Model):
         ('UNSAFE_ACT', 'Unsafe Act'),
         ('UNSAFE_CONDITION', 'Unsafe Condition'),
     ]
-    description = models.TextField(max_length=1000, name="Description")
-    occ_date = models.DateTimeField(name='Occurrence Date')
+    description = models.TextField(max_length=1000)
+    occ_date = models.DateTimeField(default=datetime.now())
     employee = models.ForeignKey(
         Employee,
         on_delete=models.CASCADE,
@@ -37,3 +44,9 @@ class Nonconformity(models.Model):
         choices=TYPE,
         default='NEAR_MISS',
     )
+
+    def __str__(self):
+        return self.type
+
+    def get_absolute_url(self):
+        return reverse('nonconformity:detail', kwargs={'pk': self.pk})

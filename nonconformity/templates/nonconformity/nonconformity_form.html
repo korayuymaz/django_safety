@@ -1,0 +1,9 @@
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <fieldset>
+            {{ form }}
+        </fieldset>
+        <button type="submit">Report</button>
+    </form>
+</div>
