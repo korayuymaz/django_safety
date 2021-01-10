@@ -1,0 +1,10 @@
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <fieldset>
+           Are you sure you want to delete this post "{{ object.description }}
+        </fieldset>
+        <button type="submit">Delete</button>
+        <a href="{% url 'nonconformity:detail' object.id %}">Cancel</a>
+    </form>
+</div>

@@ -1,7 +1,12 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import \
+    (ListView,
+     DetailView,
+     CreateView,
+     UpdateView,
+     DeleteView)
 from .models import Nonconformity
 
 
@@ -23,8 +28,10 @@ class NonconformityCreateView(CreateView):
     fields = ['description', 'type', 'occ_date', 'employee']
 
 
-# def nonconformity_reporting(request, nonconformity_id):
-#     nonconformity = get_object_or_404(Nonconformity, pk=nonconformity_id)
-#     return render(request, 'nonconformity/report.html', {'nonconformity': nonconformity})
+class NonconformityUpdateView(UpdateView):
+    model = Nonconformity
+    fields = ['description', 'type', 'occ_date', 'employee']
 
 
+class NonconformityDeleteView(DeleteView):
+    model = Nonconformity
